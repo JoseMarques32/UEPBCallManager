@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'sector'
     ];
 
     /**
@@ -45,4 +47,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    public function openedtickets() {
+        return $this->hasMany(Ticket::class, 'user_id');
+
+    }
+
+    public function assignedtickets() {
+        return $this->hasMany(Ticket::class, 'agent_id');
+    }
+
 }
