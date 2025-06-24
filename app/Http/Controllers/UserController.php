@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+
 class UserController
 {
     public function index()
     {
-        $users = User::create(['name' => 'John Doe', 'email' => 'john@email', 'password' => 'password123']);
-        return $users;
+        $user = User::where('role', 'admin')->get();
+        return $user;
+ 
     }
 }
