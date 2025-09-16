@@ -1,16 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\TicketController;
-use App\Livewire\Counter;
- 
-Route::get('/counter', Counter::class);
+use Livewire\Volt\Volt;
+use App\Livewire\OpenTicket;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Volt::route('/', 'pages.auth.login')
+        ->name('login');
 
-Route::get('/users', [UserController::class, 'index']);
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
-Route::get('/tickets', [TicketController::class, 'index']);
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+
+
+
+require __DIR__.'/auth.php';

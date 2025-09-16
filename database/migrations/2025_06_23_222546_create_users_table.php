@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->Enum('role', ['admin', 'technician', 'teacher', 'student', 'staff'])->default('student');
+            $table->Enum('role', ['server', 'staff', 'admin'])->default('server');
+            $table->enum('sector', ['TI','ADM'])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -35,7 +36,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('category_id')->constrained();
             $table->foreignId('agent_id')->nullable()->constrained('users');
-            $table->enum('status', ['open', 'in_progress', 'closed'])->default('open');
+            $table->enum('status', ['Aberto', 'Em Progresso', 'Resolvido'])->default('Aberto');
+            $table->enum('priority', ['baixa','media','urgente'])->default('baixa');
             $table->timestamps();
         });
     }

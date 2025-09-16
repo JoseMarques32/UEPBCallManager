@@ -8,8 +8,7 @@ class UserController
 {
     public function index()
     {
-        $user = User::where('role', 'admin')->get();
-        return $user;
- 
+       
+        
     }
 }
