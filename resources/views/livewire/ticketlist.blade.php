@@ -13,8 +13,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($tickets as $ticket)
-            @if($ticket->agent->agent_id === null)  
+            @forelse ($tickets as $ticket)  
                 <tr>
                     <td class="border px-4 py-2">{{ $ticket->id }}</td>
                     <td class="border px-4 py-2">{{ $ticket->title }}</td>
@@ -25,9 +24,8 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4" class="text-center py-4">Nenhum chamado encontrado.</td>
+                    <td colspan="6" class="text-center py-4">Nenhum chamado encontrado</td>
                 </tr>
-            @endif
             @endforelse
         </tbody>
     </table>
