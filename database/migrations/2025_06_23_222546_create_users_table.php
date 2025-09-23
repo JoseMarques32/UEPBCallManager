@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up()
     {
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -36,11 +37,11 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('category_id')->constrained();
             $table->foreignId('agent_id')->nullable()->constrained('users');
-            $table->enum('status', ['Aberto', 'Em Progresso', 'Resolvido'])->default('Aberto');
+            $table->enum('status', ['Aberto', 'Progresso', 'Resolvido'])->default('Aberto');
             $table->enum('priority', ['baixa','media','urgente'])->default('baixa');
             $table->timestamps();
-        });
-    }
+        }); 
+    } 
 
     /**
      * Reverse the migrations.
@@ -50,5 +51,7 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        
     }
+
 };

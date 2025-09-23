@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\TicketList;
 use Livewire\Volt\Volt;
 
 Route::middleware('guest')->group(function () {
@@ -29,4 +31,6 @@ Route::middleware('auth')->group(function () {
         ->name('password.confirm');
 
     Volt::route('createticket','create-ticket')->name('createticket');
+
+    Route::post('/tickets/{ticket}/claim', [TicketList::class,'claimTicket'])->name('claimticket');
 });

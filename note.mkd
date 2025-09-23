@@ -1,0 +1,17 @@
+ @foreach($tickets as $ticket)
+                <div class="p-4 border rounded mb-2">
+                    <h3>{{ $ticket->title }}</h3>
+                    <p>{{ $ticket->description }}</p>
+                    <p>Status: {{ $ticket->status }}</p>
+
+                    {{-- Mostrar botão só para staff e se ticket não tiver staff atribuído --}}
+                    @if(auth()->user()->role === 'staff' && $ticket->agent_id === null)
+                        <form action="{{ url('/tickets/'.$ticket->id.'/claim') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+                                Atribuir a mim mesmo
+                            </button>
+                        </form>
+                    @endif
+                </div>
+            @endforeach
