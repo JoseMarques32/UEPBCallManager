@@ -33,4 +33,8 @@ class Ticket extends Model
     public function agent() {
         return $this->belongsTo(User::class, 'agent_id');
     }
+
+    public function responses() {
+        return $this->hasMany(ResponseTicket::class);
+    }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\TicketList;
+use App\Livewire\TicketResponseForm;
 use Livewire\Volt\Volt;
 
 Route::middleware('guest')->group(function () {
@@ -33,4 +34,6 @@ Route::middleware('auth')->group(function () {
     Volt::route('createticket','create-ticket')->name('createticket');
 
     Route::post('/tickets/{ticket}/claim', [TicketList::class,'claimTicket'])->name('claimticket');
+    Route::get('/tickets/{ticket}/responder',  function (App\Models\Ticket $ticket) {
+        return view('response', compact('ticket'));})->name('tickets.response');
 });

@@ -3,14 +3,14 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use app\Models\User;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
 
 class TicketList extends Component
 {
+    public $statusfilter = 'all'; 
 
-    public $tickets;
+     public $tickets;
 
     public function mount()
     {
@@ -40,6 +40,12 @@ class TicketList extends Component
         $ticket->save();
 
         return redirect()->back()->with('success', 'Chamado atribuido com sucesso!');
+    }
+
+
+    public function RespondTicket() 
+    {
+        
     }
 
     public function render()
