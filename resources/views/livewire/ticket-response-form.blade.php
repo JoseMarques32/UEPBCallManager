@@ -39,7 +39,7 @@
     </div>
 
     <!-- Formulário de resposta -->
-    @if(auth()->user()->role === 'staff')
+    @if(auth()->user()->role === 'staff' || auth)
         <div class="mt-8 border-t pt-4">
             <h4 class="font-semibold text-gray-800 mb-2">Adicionar Resposta</h4>
 

@@ -34,6 +34,9 @@ Route::middleware('auth')->group(function () {
     Volt::route('createticket','create-ticket')->name('createticket');
 
     Route::post('/tickets/{ticket}/claim', [TicketList::class,'claimTicket'])->name('claimticket');
+    
     Route::get('/tickets/{ticket}/responder',  function (App\Models\Ticket $ticket) {
         return view('response', compact('ticket'));})->name('tickets.response');
+
+        
 });

@@ -12,20 +12,23 @@ class TicketResponseForm extends Component
 
     public $ticket;
     public $message = '';
+    public $user;
 
     public function mount(Ticket $ticket)
     {
-        $this->ticket = $ticket;
+        $this->user = Auth::user();
+
+        if($this->user->id !== $ticket->user_id && $this->user->role !== 'staff') {
+            session()->flash('error','Apenas um Staff pode responder a um chamado');
+            return;
+        }
+
+        $this->ticket = $ticket->load('responses.user');
     }
 
     public function sendresponse() 
     {
-        $user = Auth::user();
-
-        if($user->role !== 'staff') {
-            session()->flash('error','Apenas um Staff pode responder a um chamado');
-            return;
-        }
+        
 
         $this->validate([
             'message' => 'required|min:10'
@@ -33,7 +36,7 @@ class TicketResponseForm extends Component
 
         ResponseTicket::create([
             'ticket_id' => $this->ticket->id,
-            'user_id' => $user->id,
+            'user_id' => $this->user->id,
             'message' => $this->message
         ]);
 

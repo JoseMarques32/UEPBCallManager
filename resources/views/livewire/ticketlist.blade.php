@@ -35,8 +35,15 @@
         <tbody>
             @forelse ($tickets as $ticket)  
                 <tr>
-                    <td class="border px-4 py-2">{{ $ticket->id }}</td>
-                    <td class="border px-4 py-2">{{ $ticket->title }}</td>
+                    <td class="border px-4 py-2">{{ $ticket->id }}</td> 
+                    @if(auth()->user()->id === $ticket->user_id)
+                    
+                    <td class="border px-4 py-2">
+                        <a href="{{ route('tickets.response', $ticket->id) }}" class="bg-green-500 px-4 py-2 rounded">
+                                {{ $ticket->title }}
+                        </a> 
+                    </td>
+                    @endif
                     <td class="border px-4 py-2">{{ $ticket->description }}</td>
                     <td class="border px-4 py-2">{{ $ticket->created_at->format('d/m/Y') }}</td>
                     <td class="border px-4 py-2">{{ $ticket->status }}</td>
